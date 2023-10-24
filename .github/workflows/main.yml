@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - builds/nginx_waf/
+      - builds/nginx_waf/**
 name: Linux_Container_Workflow
 
 jobs:
