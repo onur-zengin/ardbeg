@@ -26,3 +26,6 @@ jobs:
         - run: |
             docker build -f builds/nginx_waf/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:${{ github.sha }} .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec:${{ github.sha }}
+
+
+        
