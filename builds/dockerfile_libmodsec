@@ -1,0 +1,25 @@
+FROM ubuntu:latest
+#FROM debian:latest
+
+RUN apt-get update -y && apt-get install -y \
+        git g++ apt-utils autoconf automake build-essential \
+        libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre2-dev \
+        libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf zlib1g-dev \
+    #&& nginx -v \
+    && echo "### Downloading libModSecurity3 source code" \
+    && cd /usr/src \
+    && git clone https://github.com/SpiderLabs/ModSecurity.git \
+    && cd ModSecurity \
+    && echo "### Installing libinjection" \
+    ## The libinjection dependency was made part of the ModSecurity project as a gitsubmodule
+    && git submodule init && git submodule update \
+    && echo "### Configuring the build" \
+    && ./build.sh \
+    && ./configure --with-pcre2 \
+    && echo "### Compiling the source code" \
+    && make \
+    && make install 
+
+CMD service nginx start
+
+EXPOSE 80
