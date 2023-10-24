@@ -1,4 +1,4 @@
-FROM ardbegregistry/modsec
+FROM ardbegregistry.azurecr.io/ardbegregistry/modsec
 #FROM ardbegregistry/libmodsec
 
 RUN apt-get update -y && apt-get install -y libpcre++-dev \
@@ -26,4 +26,3 @@ COPY ./configs/modsec.conf /etc/nginx/modsec/main.conf
 
 CMD service nginx start
 
-EXPOSE 80
