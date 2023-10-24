@@ -1,4 +1,7 @@
-on: [push]
+on:
+  push:
+    paths:
+      - builds/nginx_waf/
 name: Linux_Container_Workflow
 
 jobs:
@@ -21,5 +24,5 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build -f builds/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec:${{ github.sha }} .
+            docker build -f builds/nginx_waf/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:${{ github.sha }} .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec:${{ github.sha }}
