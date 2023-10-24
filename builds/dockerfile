@@ -17,8 +17,7 @@ RUN apt-get update -y && apt-get install -y \
     && ./configure --with-pcre2 \
     && echo "## Compiling Modsecurity" \
     && make \
-    && make install \
-    && cd..
+    && make install 
     #&& echo "### Downloading the Modsecurity Nginx Connector source code" \
     #&& cd /usr/src \   
     #&& git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git \
