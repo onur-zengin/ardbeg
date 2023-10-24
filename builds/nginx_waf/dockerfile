@@ -1,4 +1,4 @@
-FROM modsec
+FROM ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec
 #FROM libmodsec
 
 RUN apt-get update -y && apt-get install -y libpcre++-dev \
