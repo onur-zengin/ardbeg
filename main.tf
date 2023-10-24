@@ -5,16 +5,16 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_kubernetes_cluster" "k8s" {
   location            = azurerm_resource_group.rg.location
-  name                = cluster_ardbeg
+  name                = "cluster_ardbeg"
   resource_group_name = azurerm_resource_group.rg.name
-  dns_prefix          = ns_ardbeg
+  dns_prefix          = "ardbeg"
 
   identity {
     type = "SystemAssigned"
   }
 
   default_node_pool {
-    name       = "agentpool"
+    name       = "systempool"
     vm_size    = "Standard_D2_v2"
     node_count = var.system_node_count
   }

@@ -13,7 +13,7 @@ variable "system_node_count" {
 variable "user_node_count" {
   type        = number
   description = "The initial quantity of nodes for the user node pool."
-  default     = 1
+  default     = 0
 }
 
 variable "username" {
