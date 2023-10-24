@@ -1,4 +1,4 @@
-FROM ardbegregistry.azurecr.io/ardbegregistry/modsec
+FROM ardbegregistry.azurecr.io/modsec
 #FROM ardbegregistry/libmodsec
 
 RUN apt-get update -y && apt-get install -y libpcre++-dev \
