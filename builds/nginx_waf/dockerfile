@@ -1,4 +1,5 @@
-FROM libmodsec
+FROM modsec
+#FROM libmodsec
 
 RUN apt-get update -y && apt-get install -y libpcre++-dev \
     && cd /usr/src \
