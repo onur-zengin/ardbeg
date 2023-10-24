@@ -1,5 +1,5 @@
 FROM ardbegregistry/modsec
-#FROM libmodsec
+#FROM ardbegregistry/libmodsec
 
 RUN apt-get update -y && apt-get install -y libpcre++-dev \
     && cd /usr/src \
