@@ -21,5 +21,5 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec:${{ github.sha }}
+            docker build . -f builds/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/modsec:${{ github.sha }}
