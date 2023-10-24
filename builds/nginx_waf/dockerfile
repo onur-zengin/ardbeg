@@ -1,5 +1,5 @@
-FROM ardbegregistry.azurecr.io/modsec
-#FROM ardbegregistry/libmodsec
+FROM ardbegregistry.azurecr.io/modsec:b3ad424694177e8d5e34432f6b7bb6ac97b655a3
+#FROM ardbegregistry/libmodsec:latest
 
 RUN apt-get update -y && apt-get install -y libpcre++-dev \
     && cd /usr/src \
@@ -9,7 +9,7 @@ RUN apt-get update -y && apt-get install -y libpcre++-dev \
     && tar -xvzf nginx-1.22.1.tar.gz \
     && echo "### Downloading the ModSecurity Nginx-Connector source code" \   
     && git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git \
-    && echo "### Compiling the Nginx source code with ModSec as a dynamic module" \
+    && echo "### Compiling Nginx source code with ModSec as a dynamic module" \
     && cd nginx-1.22.1 \
     && ./configure --with-compat --add-dynamic-module=../ModSecurity-nginx \
     && make modules \
