@@ -1,7 +1,7 @@
 FROM ardbegregistry.azurecr.io/modsec:b3ad424694177e8d5e34432f6b7bb6ac97b655a3
 #FROM ardbegregistry/libmodsec:latest
 
-RUN apt-get update -y && apt-get install -y libpcre++-dev \
+RUN apt-get update -y && apt-get install -y libpcre++-dev wget \
     && cd /usr/src \
     && echo "### Downloading the Nginx source code" \
     ## git clone https://github.com/nginx/nginx.git
