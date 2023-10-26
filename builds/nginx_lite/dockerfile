@@ -1,0 +1,9 @@
+FROM ubuntu:latest
+#FROM debian:latest
+
+RUN apt-get update -y && apt-get install -y nginx \
+    && nginx -v 
+
+CMD service nginx start
+
+EXPOSE 80
