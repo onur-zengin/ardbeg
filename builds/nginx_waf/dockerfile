@@ -23,7 +23,6 @@ RUN apt-get update -y && apt-get install -y libpcre++-dev wget \
     && cp /usr/src/ModSecurity/unicode.mapping /etc/nginx/modsec \
     && sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/nginx/modsec/modsecurity.conf 
     
-
 ADD nginx.conf /etc/nginx/
 ADD server.conf /etc/nginx/conf.d/
 ADD modsec.conf /etc/nginx/modsec/main.conf
