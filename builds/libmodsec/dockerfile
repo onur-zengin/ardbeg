@@ -1,5 +1,7 @@
-FROM ubuntu:latest
-#FROM debian:latest
+#FROM nginx_base
+#FROM ubuntu:22.04
+#FROM ubuntu:latest
+FROM ardbegregistry.azurecr.io/nginx_base:latest
 
 RUN apt-get update -y && apt-get install -y \
         git g++ apt-utils autoconf automake build-essential \
@@ -8,6 +10,7 @@ RUN apt-get update -y && apt-get install -y \
     #&& nginx -v \
     && echo "### Downloading libModSecurity3 source code" \
     && cd /usr/src \
+    # --depth 1 -b v3/master --single-branch 
     && git clone https://github.com/SpiderLabs/ModSecurity.git \
     && cd ModSecurity \
     && echo "### Installing libinjection" \
@@ -20,6 +23,4 @@ RUN apt-get update -y && apt-get install -y \
     && make \
     && make install 
 
-CMD service nginx start
-
-EXPOSE 80
+CMD ["sleep", "infinity"]
