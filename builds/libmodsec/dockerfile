@@ -1,6 +1,4 @@
 #FROM nginx_base
-#FROM ubuntu:22.04
-#FROM ubuntu:latest
 FROM ardbegregistry.azurecr.io/nginx_base:latest
 
 RUN apt-get update -y && apt-get install -y \
