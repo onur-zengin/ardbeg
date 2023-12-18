@@ -10,8 +10,8 @@ RUN apt-get update && \
 RUN ["nginx", "-v"]
 
 ADD builds/nginx_base/nginx.conf /etc/nginx/
-#ADD server.conf /etc/nginx/conf.d
-ADD index.html /usr/share/nginx/html
+ADD builds/nginx_base/index.html /usr/share/nginx/html
+#ADD builds/nginx_baseserver.conf /etc/nginx/conf.d
 
 EXPOSE 443 80
 
