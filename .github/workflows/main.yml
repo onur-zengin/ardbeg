@@ -42,7 +42,6 @@ jobs:
           run: |
             docker build -f builds/nginx_base/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
-          working-directory: builds/nginx_base
         - name: libmodsec image
           run: |
             docker build -f builds/libmodsec/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:latest .
