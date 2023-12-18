@@ -19,41 +19,19 @@ jobs:
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        - name: Azure CLI script
-          uses: azure/CLI@v1
-          with:
-            azcliversion: latest
-            inlineScript: |
-              az account show
-
-    build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
         - name: 'Login to registry'
           uses: azure/docker-login@v1
           with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.ARM_GITHUB_CLIENT_ID}}
             password: ${{ secrets.ARM_GITHUB_CLIENT_SECRET }}
-        - name: print working directory
-          run: |
-            pwd
-            ls -lart
-            ls -lart ../
-        - name: nginx base image
-          working-directory: ../builds/nginx_base
-          run: |
-            docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
+        - run: |
+            docker build -f builds/nginx_base/dockerfile-t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
-        - name: libmodsec image
-          run: |
             docker build -f builds/libmodsec/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:${{ github.sha }}
-          working-directory: builds/libmodsec
-        - name: nginx waf image
-          run: |
             docker build -f builds/nginx_waf/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:latest
-          working-directory: builds/nginx_waf
+
 
         
