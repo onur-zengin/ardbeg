@@ -1,12 +1,13 @@
 on:
   push:
-    paths:
-      - builds/nginx_base/**
+    #paths:
+    #  - builds/nginx_base/**
 
 name: Linux_Container_Workflow
 
 jobs:
-    build-and-deploy:
+
+    basic-tests:
         runs-on: ubuntu-latest
         steps:
         # checkout the repo
@@ -24,8 +25,14 @@ jobs:
             azcliversion: latest
             inlineScript: |
               az account show
-        
-        - name: 'Build and push image'
+
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: ./builds
+      steps:
+        - name: 'Login to registry'
           uses: azure/docker-login@v1
           with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
@@ -35,16 +42,16 @@ jobs:
           run: |
             docker build -f builds/nginx_base/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
-          working-directory: ./builds/nginx_base
+          working-directory: ./nginx_base
         - name: libmodsec image
           run: |
             docker build -f builds/libmodsec/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:${{ github.sha }}
-          working-directory: ./builds/libmodsec
+          working-directory: ./libmodsec
         - name: nginx waf image
           run: |
             docker build -f builds/nginx_waf/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:latest
-          working-directory: ./builds/nginx_waf
+          working-directory: ./nginx_waf
 
         
