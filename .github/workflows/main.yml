@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - builds/nginx_base/**
+
 name: Linux_Container_Workflow
 
 jobs:
@@ -16,13 +17,20 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        - name: Azure CLI script
+          uses: azure/CLI@v1
+          with:
+            azcliversion: latest
+            inlineScript: |
+              az account show
         
         - name: 'Build and push image'
           uses: azure/docker-login@v1
           with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            username: ${{ secrets.REGISTRY_USERNAME }}
-            password: ${{ secrets.REGISTRY_PASSWORD }}
+            username: ${{ secrets.ARM_GITHUB_CLIENT_ID}}
+            password: ${{ secrets.ARM_GITHUB_CLIENT_SECRET }}
         - run: |
             docker build -f builds/nginx_base/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
