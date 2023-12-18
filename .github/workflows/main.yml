@@ -28,9 +28,6 @@ jobs:
 
     build-and-deploy:
       runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: ./builds
       steps:
         - name: 'Login to registry'
           uses: azure/docker-login@v1
