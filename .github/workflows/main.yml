@@ -39,8 +39,9 @@ jobs:
           run: |
             pwd
         - name: nginx base image
+          working-directory: builds/nginx_base
           run: |
-            docker build -f builds/nginx_base/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
+            docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
         - name: libmodsec image
           run: |
