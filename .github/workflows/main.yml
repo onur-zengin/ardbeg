@@ -38,8 +38,10 @@ jobs:
         - name: print working directory
           run: |
             pwd
+            ls -lart
+            ls -lart ../
         - name: nginx base image
-          working-directory: builds/nginx_base
+          working-directory: ../builds/nginx_base
           run: |
             docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
