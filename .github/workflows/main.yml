@@ -31,17 +31,20 @@ jobs:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.ARM_GITHUB_CLIENT_ID}}
             password: ${{ secrets.ARM_GITHUB_CLIENT_SECRET }}
-        - run: |
+        - name: nginx base image
+          run: |
             docker build -f builds/nginx_base/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
-            working-directory: ./builds/nginx_base
-        - run: |
+          working-directory: ./builds/nginx_base
+        - name: libmodsec image
+          run: |
             docker build -f builds/libmodsec/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:${{ github.sha }}
-            working-directory: ./builds/libmodsec
-        - run: |
+          working-directory: ./builds/libmodsec
+        - name: nginx waf image
+          run: |
             docker build -f builds/nginx_waf/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-waf:latest
-            working-directory: ./builds/nginx_waf
+          working-directory: ./builds/nginx_waf
 
         
