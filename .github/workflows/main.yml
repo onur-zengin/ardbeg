@@ -26,7 +26,7 @@ jobs:
             username: ${{ secrets.ARM_GITHUB_CLIENT_ID}}
             password: ${{ secrets.ARM_GITHUB_CLIENT_SECRET }}
         - run: |
-            docker build -f builds/nginx_base/dockerfile-t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
+            docker build -f builds/nginx_base/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx-base:latest
             docker build -f builds/libmodsec/dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/libmodsec:${{ github.sha }}
