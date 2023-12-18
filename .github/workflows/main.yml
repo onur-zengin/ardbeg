@@ -1,7 +1,7 @@
 on:
   push:
-    #paths:
-    #  - builds/nginx_base/**
+    paths:
+      - builds/nginx_base/**
 
 name: Linux_Container_Workflow
 
